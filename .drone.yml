@@ -28,13 +28,13 @@ steps:
     files:
     - "dist/artifacts/*"
   when:
-    instance:
-    - drone-publish.rancher.io
+          #instance:
+          #- drone-publish.rancher.io
     ref:
     - refs/head/master
     - refs/tags/*
-    event:
-    - tag
+      #event:
+      #- tag
 
 volumes:
 - name: docker
@@ -71,13 +71,13 @@ steps:
     files:
     - "dist/artifacts/*"
   when:
-    instance:
-    - drone-publish.rancher.io
+          #instance:
+            #- drone-publish.rancher.io
     ref:
     - refs/head/master
     - refs/tags/*
-    event:
-    - tag
+      #event:
+            #- tag
 
 volumes:
 - name: docker
