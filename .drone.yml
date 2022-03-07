@@ -11,7 +11,7 @@ steps:
 - name: build
   image: rancher/dapper:v0.4.2
   commands:
-  - sleep 5
+  - "until (echo | nc local:/var/run/docker.sock | grep -q HTTP); do echo 'waiting..'; sleep 1; done"
   - dapper ci
   volumes:
   - name: dockersock
