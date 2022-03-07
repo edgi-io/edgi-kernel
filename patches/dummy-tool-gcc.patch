@@ -1,0 +1,22 @@
+diff -urbB kernel.unpatched/scripts/dummy-tools/gcc kernel/scripts/dummy-tools/gcc
+--- kernel.unpatched/scripts/dummy-tools/gcc	2021-10-31 21:53:10.000000000 +0100
++++ kernel/scripts/dummy-tools/gcc	2022-02-22 22:02:22.000000000 +0100
+@@ -94,17 +94,6 @@
+ 	fi
+ fi
+ 
+-# To set GCC_PLUGINS
+-if arg_contain -print-file-name=plugin "$@"; then
+-	plugin_dir=$(mktemp -d)
+-
+-	mkdir -p $plugin_dir/include
+-	touch $plugin_dir/include/plugin-version.h
+-
+-	echo $plugin_dir
+-	exit 0
+-fi
+-
+ # inverted return value
+ if arg_contain -D__SIZEOF_INT128__=0 "$@"; then
+ 	exit 1
+
