@@ -7,7 +7,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN set -x \
  && apt-get --assume-yes update \
  && apt-get --assume-yes install software-properties-common \
- && apt-get --assume-yes download linux-firmware=20220217.git6342082c-0ubuntu3 linux-source-5.15.0=5.15.0-18.18 \
+ && apt-get --assume-yes download linux-firmware linux-source-5.15.0=5.15.0-18.18 \
  && mkdir -vp ${DOWNLOADS} \
  && mv -vf linux-firmware* ${DOWNLOADS}/ubuntu-firmware.deb \
  && mv -vf linux-source* ${DOWNLOADS}/ubuntu-kernel.deb
