@@ -11,6 +11,7 @@ steps:
 - name: build
   image: rancher/dapper:v0.4.2
   commands:
+  - sleep 5
   - dapper ci
   volumes:
   - name: dockersock
