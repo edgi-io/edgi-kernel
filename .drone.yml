@@ -10,11 +10,10 @@ name: amd64
 steps:
 - name: build
   image: rancher/dapper:v0.4.2
+  environment:
+    DOCKER_HOST: tcp://localhost:2375
   commands:
   - dapper ci
-  volumes:
-  - name: docker
-    path: /var/run/docker.sock
 
 - name: github_binary_release
   image: ibuildthecloud/github-release:v0.0.1
@@ -37,10 +36,6 @@ steps:
       #event:
       #- tag
 
-volumes:
-- name: docker
-  host:
-    path: /var/run/docker.sock
 
 #---
 #kind: pipeline
