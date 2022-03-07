@@ -1,17 +1,14 @@
 ---
 kind: pipeline
-type: kubernetes
 name: amd64
 
-#platform:
-#  os: linux
-#  arch: amd64
+platform:
+  os: linux
+  arch: amd64
 
 steps:
 - name: build
   image: rancher/dapper:v0.4.2
-  environment:
-    DOCKER_HOST: tcp://localhost:2375
   commands:
   - dapper ci
 
