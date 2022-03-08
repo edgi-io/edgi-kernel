@@ -52,11 +52,17 @@ services:
   volumes:
   - name: dockersock
     path: /var/run
+  - name: docker_var_lib
+    path: /var/lib/docker
+  environment:
+    DOCKER_DRIVER: overlay2
 
 volumes:
 - name: dockersock
   temp: {}
-
+- name: docker_var_lib
+  host:
+    path: /var/lib/dind/
 #---
 #kind: pipeline
 #type: kubernetes
