@@ -14,10 +14,10 @@ steps:
   - "until (echo | nc local:/var/run/docker.sock | grep -q HTTP); do echo 'waiting..'; sleep 1; done"
   - dapper ci
   volumes:
-#  - name: dockersock
-#    path: /var/run
-  - name: docker
-    path: /var/run/docker.sock
+  - name: dockersock
+    path: /var/run
+#  - name: docker
+#    path: /var/run/docker.sock
 
 - name: github_binary_release
   image: ibuildthecloud/github-release:v0.0.1
@@ -40,18 +40,18 @@ steps:
       #event:
       #- tag
 
-volumes:
-- name: docker
-  host:
-    path: /var/run/docker.sock
-
-#services:
+#volumes:
 #- name: docker
-#  image: docker:dind
-#  privileged: true
-#  volumes:
-#  - name: dockersock
-#    path: /var/run
+#  host:
+#    path: /var/run/docker.sock
+
+services:
+- name: docker
+  image: docker:dind
+  privileged: true
+  volumes:
+  - name: dockersock
+    path: /var/run
 
 volumes:
 - name: dockersock
