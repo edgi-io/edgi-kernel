@@ -26,8 +26,6 @@ FROM ${APT_GCC}
 ARG DOWNLOADS=/usr/src/downloads
 COPY --from=base ${DOWNLOADS}/ ${DOWNLOADS}/
 RUN apt-get update \
- && apt-get install -y apt-show-versions \
- && apt-show-versions -p libc6 \
  && apt-get install -y \
     kernel-wedge \
     libncurses-dev \
@@ -47,13 +45,13 @@ RUN apt-get update \
     libudev-dev \
     pciutils-dev \
     libmpc-dev \
-    libc6=2.35-0ubuntu3 \
- && rm -f /bin/sh && ln -s /bin/bash /bin/sh \
- && apt-show-versions -p libc6 \
- && echo pahole version: $(pahole --version)
+ && rm -f /bin/sh && ln -s /bin/bash /bin/sh
 
-# && wget http://archive.ubuntu.com/ubuntu/pool/universe/d/dwarves-dfsg/dwarves_1.20-1_amd64.deb
-# && apt install ./dwarves_1.20-1_amd64.deb
+RUN wget http://archive.ubuntu.com/ubuntu/pool/main/g/glibc/libc6_2.35-0ubuntu3_amd64.deb \
+ && apt install ./libc6_2.35-0ubuntu3_amd64.deb \
+ && wget http://archive.ubuntu.com/ubuntu/pool/universe/d/dwarves-dfsg/dwarves_1.20-1_amd64.deb \
+ && apt install ./dwarves_1.20-1_amd64.deb \
+ && echo pahole version: $(pahole --version)
 
 ########## Dapper Configuration #####################
 
