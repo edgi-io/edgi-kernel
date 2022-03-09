@@ -26,6 +26,8 @@ FROM ${APT_GCC}
 ARG DOWNLOADS=/usr/src/downloads
 COPY --from=base ${DOWNLOADS}/ ${DOWNLOADS}/
 RUN apt-get update \
+ && apt-get install -y apt-show-versions \
+ && apt-show-versions -p libc6 \
  && apt-get install -y \
     kernel-wedge \
     libncurses-dev \
@@ -47,6 +49,7 @@ RUN apt-get update \
     libmpc-dev \
     libc6=2.35-0ubuntu3 \
  && rm -f /bin/sh && ln -s /bin/bash /bin/sh \
+ && apt-show-versions -p libc6 \
  && echo pahole version: $(pahole --version)
 
 # && wget http://archive.ubuntu.com/ubuntu/pool/universe/d/dwarves-dfsg/dwarves_1.20-1_amd64.deb
