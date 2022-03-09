@@ -45,10 +45,12 @@ RUN apt-get update \
     libudev-dev \
     pciutils-dev \
     libmpc-dev \
+    libc6=2.35-0ubuntu3 \
  && rm -f /bin/sh && ln -s /bin/bash /bin/sh \
- && wget http://archive.ubuntu.com/ubuntu/pool/universe/d/dwarves-dfsg/dwarves_1.20-1_amd64.deb \
- && apt install ./dwarves_1.20-1_amd64.deb \
  && echo pahole version: $(pahole --version)
+
+# && wget http://archive.ubuntu.com/ubuntu/pool/universe/d/dwarves-dfsg/dwarves_1.20-1_amd64.deb
+# && apt install ./dwarves_1.20-1_amd64.deb
 
 ########## Dapper Configuration #####################
 
