@@ -47,7 +47,7 @@ RUN apt-get update \
     libmpc-dev \
  && rm -f /bin/sh && ln -s /bin/bash /bin/sh \
  && wget http://archive.ubuntu.com/ubuntu/pool/universe/d/dwarves-dfsg/dwarves_1.20-1_amd64.deb \
- && gdebi dwarves_1.20-1_amd64.deb \
+ && apt install dwarves_1.20-1_amd64.deb \
  && echo pahole version: $(pahole --version)
 
 ########## Dapper Configuration #####################
