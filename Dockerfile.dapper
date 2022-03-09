@@ -27,6 +27,7 @@ ARG DOWNLOADS=/usr/src/downloads
 COPY --from=base ${DOWNLOADS}/ ${DOWNLOADS}/
 RUN apt list libc6
 RUN sed -i 's/buster/bullseye/g; /security/d' /etc/apt/sources.list
+RUN dpkg -P gcc && dpkg -P g++ && apt-get clean
 RUN apt-get update \
  && apt-get full-upgrade -y \
  && apt-get install -y \
