@@ -26,7 +26,7 @@ FROM ${APT_GCC}
 ARG DOWNLOADS=/usr/src/downloads
 COPY --from=base ${DOWNLOADS}/ ${DOWNLOADS}/
 RUN apt list libc6
-RUN cat /etc/apt/sources.list
+RUN sed -i 's/buster/bullseye/g' /etc/apt/sources.list
 RUN apt-get update \
  && apt-get install -y \
     kernel-wedge \
