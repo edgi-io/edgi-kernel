@@ -26,9 +26,9 @@ FROM ${APT_GCC}
 ARG DOWNLOADS=/usr/src/downloads
 COPY --from=base ${DOWNLOADS}/ ${DOWNLOADS}/
 RUN apt list libc6
-#RUN sed -i 's/buster/bullseye/g' /etc/apt/sources.list
+RUN sed -i 's/buster/bullseye/g; /security/d' /etc/apt/sources.list
 RUN apt-get update \
- && apt-get full-upgrade \
+ && apt-get full-upgrade -y \
  && apt-get install -y \
     kernel-wedge \
     libncurses-dev \
