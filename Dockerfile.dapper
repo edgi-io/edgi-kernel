@@ -28,6 +28,7 @@ COPY --from=base ${DOWNLOADS}/ ${DOWNLOADS}/
 RUN apt list libc6
 RUN apt list gcc
 RUN ls -l /usr/bin/gcc || true
+RUN ls -l /usr/local/bin/gcc || true
 RUN dpkg -l gcc
 RUN update-alternatives --get-selections | grep gcc
 RUN update-alternatives --display cc
