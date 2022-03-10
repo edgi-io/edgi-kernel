@@ -46,6 +46,7 @@ RUN apt-get update \
     libpci-dev \
     libmpc-dev \
     dwarves \
+    zstd \
  && rm -f /bin/sh && ln -s /bin/bash /bin/sh \
  && echo pahole version: $(pahole --version)
 
