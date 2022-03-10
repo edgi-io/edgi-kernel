@@ -33,7 +33,7 @@ RUN dpkg -l gcc
 RUN update-alternatives --get-selections | grep gcc
 RUN update-alternatives --display cc
 #RUN dpkg -P gcc g++ && apt-get clean && apt-get install -f
-RUN update-alternatives --install /usr/bin/gcc gcc `which /usr/local/bin/gcc`
+RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8
 RUN sed -i 's/buster/bullseye/g; /security/d' /etc/apt/sources.list
 RUN apt-get update \
  && apt-get full-upgrade -y \
