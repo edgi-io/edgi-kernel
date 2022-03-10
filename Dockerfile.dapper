@@ -27,7 +27,9 @@ ARG DOWNLOADS=/usr/src/downloads
 COPY --from=base ${DOWNLOADS}/ ${DOWNLOADS}/
 RUN apt list libc6
 RUN apt list gcc
+RUN ls -l /etc/alternatives/gcc || true
 RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 999
+RUN update-alternatives --set gcc /usr/bin/gcc-8
 RUN ls -l /usr/bin/gcc* || true
 RUN ls -l /usr/local/bin/gcc* || true
 RUN dpkg -l gcc
