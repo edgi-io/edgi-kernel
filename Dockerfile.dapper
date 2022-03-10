@@ -27,13 +27,13 @@ ARG DOWNLOADS=/usr/src/downloads
 COPY --from=base ${DOWNLOADS}/ ${DOWNLOADS}/
 RUN apt list libc6
 RUN apt list gcc
+RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8
 RUN ls -l /usr/bin/gcc* || true
 RUN ls -l /usr/local/bin/gcc* || true
 RUN dpkg -l gcc
 RUN update-alternatives --get-selections | grep gcc
 RUN update-alternatives --display cc
 #RUN dpkg -P gcc g++ && apt-get clean && apt-get install -f
-RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8
 RUN sed -i 's/buster/bullseye/g; /security/d' /etc/apt/sources.list
 RUN apt-get update \
  && apt-get full-upgrade -y \
