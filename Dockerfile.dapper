@@ -1,4 +1,4 @@
-ARG APT_GCC=gcc:9.2
+ARG APT_GCC=gcc:bullseye
 
 FROM ubuntu:jammy AS base
 ARG DOWNLOADS=/usr/src/downloads
@@ -25,20 +25,7 @@ RUN set -x \
 FROM ${APT_GCC}
 ARG DOWNLOADS=/usr/src/downloads
 COPY --from=base ${DOWNLOADS}/ ${DOWNLOADS}/
-RUN apt list libc6
-RUN apt list gcc
-RUN ls -l /etc/alternatives/gcc || true
-RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 999
-RUN update-alternatives --set gcc /usr/bin/gcc-8
-RUN ls -l /usr/bin/gcc* || true
-RUN ls -l /usr/local/bin/gcc* || true
-RUN dpkg -l gcc
-RUN update-alternatives --get-selections | grep gcc
-RUN update-alternatives --display cc
-#RUN dpkg -P gcc g++ && apt-get clean && apt-get install -f
-RUN sed -i 's/buster/bullseye/g; /security/d' /etc/apt/sources.list
 RUN apt-get update \
- && apt-get full-upgrade -y \
  && apt-get install -y \
     kernel-wedge \
     libncurses-dev \
@@ -56,16 +43,10 @@ RUN apt-get update \
     rsync \
     gawk  \
     libudev-dev \
-    pciutils-dev \
+    libpci-dev \
     libmpc-dev \
- && rm -f /bin/sh && ln -s /bin/bash /bin/sh
-
-RUN apt list libc6
-RUN cat /etc/apt/sources.list
-#RUN wget http://archive.ubuntu.com/ubuntu/pool/main/g/glibc/libc6_2.35-0ubuntu3_amd64.deb \
-# && apt install ./libc6_2.35-0ubuntu3_amd64.deb
-RUN wget http://archive.ubuntu.com/ubuntu/pool/universe/d/dwarves-dfsg/dwarves_1.20-1_amd64.deb \
- && apt install ./dwarves_1.20-1_amd64.deb \
+    dwarves \
+ && rm -f /bin/sh && ln -s /bin/bash /bin/sh \
  && echo pahole version: $(pahole --version)
 
 ########## Dapper Configuration #####################
