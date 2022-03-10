@@ -26,8 +26,13 @@ FROM ${APT_GCC}
 ARG DOWNLOADS=/usr/src/downloads
 COPY --from=base ${DOWNLOADS}/ ${DOWNLOADS}/
 RUN apt list libc6
+RUN apt list gcc
+RUN ls -l /usr/bin/gcc
+RUN dpkg -l gcc
+RUN update-alternatives --get-selections | grep gcc
+RUN update-alternatives --display cc
+RUN dpkg -P gcc g++ && apt-get clean && apt-get install -f
 RUN sed -i 's/buster/bullseye/g; /security/d' /etc/apt/sources.list
-RUN dpkg -P gcc g++ && apt-get clean
 RUN apt-get update \
  && apt-get full-upgrade -y \
  && apt-get install -y \
