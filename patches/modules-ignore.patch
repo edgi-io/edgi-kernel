@@ -1,0 +1,12 @@
+diff -urbB kernel.unpatched/debian.master/abi/modules.ignore kernel/debian.master/abi/modules.ignore
+--- kernel.unpatched/debian.master/abi/modules.ignore	2022-01-21 13:32:27.000000000 +0100
++++ kernel/debian.master/abi/modules.ignore	2022-02-22 22:02:22.000000000 +0100
+@@ -9,3 +9,8 @@
+ zpios
+ zunicode
+ zzstd
++gpio-aaeon
++hwmon-aaeon
++leds-aaeon
++mfd-aaeon
++wdt_aaeon
