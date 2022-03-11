@@ -16,34 +16,6 @@ steps:
   volumes:
   - name: dockersock
     path: /var/run
-#  - name: docker
-#    path: /var/run/docker.sock
-
-- name: github_binary_release
-  image: ibuildthecloud/github-release:v0.0.1
-  settings:
-    api_key:
-      from_secret: github_token
-    prerelease: true
-    checksum:
-    - sha256
-    checksum_file: CHECKSUMsum-amd64.txt
-    checksum_flatten: true
-    files:
-    - "dist/artifacts/*"
-  when:
-          #instance:
-          #- drone-publish.rancher.io
-    ref:
-    - refs/head/main
-    - refs/tags/*
-      #event:
-      #- tag
-
-#volumes:
-#- name: docker
-#  host:
-#    path: /var/run/docker.sock
 
 services:
 - name: docker
@@ -63,6 +35,7 @@ volumes:
 - name: docker_var_lib
   host:
     path: /var/lib/dind/
+
 #---
 #kind: pipeline
 #type: kubernetes
