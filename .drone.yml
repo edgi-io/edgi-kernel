@@ -21,7 +21,7 @@ steps:
 volumes:
 - name: docker
   host:
-    path: /var/run
+    path: /var/run/dind
 ---
 kind: pipeline
 type: kubernetes
@@ -45,4 +45,4 @@ steps:
 volumes:
 - name: docker
   host:
-    path: /var/run
+    path: /var/run/dind
