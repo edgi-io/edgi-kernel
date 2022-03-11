@@ -38,11 +38,11 @@ volumes:
 ---
 kind: pipeline
 type: kubernetes
-name: amd64-XXX
+name: arm64
 
 platform:
   os: linux
-  arch: amd64
+  arch: arm64
 
 steps:
 - name: build
