@@ -20,7 +20,7 @@ steps:
 volumes:
 - name: docker
   host:
-    path: /var/run/docker.sock
+    path: /var/run
 ---
 kind: pipeline
 type: kubernetes
@@ -43,4 +43,4 @@ steps:
 volumes:
 - name: docker
   host:
-    path: /var/run/docker.sock
+    path: /var/run
