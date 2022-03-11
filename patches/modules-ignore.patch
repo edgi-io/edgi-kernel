@@ -1,12 +1,13 @@
-diff -urbB kernel.unpatched/debian.master/abi/modules.ignore kernel/debian.master/abi/modules.ignore
---- kernel.unpatched/debian.master/abi/modules.ignore	2022-01-21 13:32:27.000000000 +0100
-+++ kernel/debian.master/abi/modules.ignore	2022-02-22 22:02:22.000000000 +0100
-@@ -9,3 +9,8 @@
- zpios
- zunicode
- zzstd
-+gpio-aaeon
-+hwmon-aaeon
-+leds-aaeon
-+mfd-aaeon
-+wdt_aaeon
+diff -urbB kernel.unpatched/debian/rules kernel/debian/rules
+--- kernel.unpatched/debian/rules	2022-01-21 13:32:27.000000000 +0100
++++ kernel/debian/rules	2022-02-22 22:02:22.000000000 +0100
+@@ -109,6 +109,9 @@
+ 	do_wireguard_disable:=$(shell for m in $$(cat $(DROOT)/wireguard-modules.ignore); do grep -qxF $$m $(prev_abidir)/../modules.ignore 2>/dev/null || echo $$m >> $(prev_abidir)/../modules.ignore; done)
+ endif
+ 
++do_aaeon_ignore:=$(shell for m in gpio-aaeon hwmon-aaeon leds-aaeon mfd-aaeon wdt_aaeon; do echo $$m >> $(prev_abidir)/../modules.ignore; done)
++
++
+ # Either tools package needs the common source preparation
+ do_any_tools=$(sort $(filter-out false,$(do_linux_tools) $(do_cloud_tools)))
+ 
