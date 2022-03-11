@@ -49,6 +49,7 @@ RUN apt-get update \
     dwarves \
     zstd \
     git \
+    dahdi-dkms \
     build-essential libncurses-dev bison flex libssl-dev libelf-dev \
  && rm -f /bin/sh && ln -s /bin/bash /bin/sh \
  && echo pahole version: $(pahole --version)
