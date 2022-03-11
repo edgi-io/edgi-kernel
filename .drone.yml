@@ -35,7 +35,43 @@ volumes:
 - name: docker_var_lib
   host:
     path: /var/lib/dind/
+---
+kind: pipeline
+type: kubernetes
+name: amd64-XXX
 
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+- name: build
+  image: rancher/dapper:v0.4.2
+  commands:
+  - "until (echo | nc local:/var/run/docker.sock | grep -q HTTP); do echo 'waiting..'; sleep 1; done"
+  - dapper ci
+  volumes:
+  - name: dockersock
+    path: /var/run
+
+services:
+- name: docker
+  image: docker:dind
+  privileged: true
+  volumes:
+  - name: dockersock
+    path: /var/run
+  - name: docker_var_lib
+    path: /var/lib/docker
+  environment:
+    DOCKER_DRIVER: overlay2
+
+volumes:
+- name: dockersock
+  temp: {}
+- name: docker_var_lib
+  host:
+    path: /var/lib/dind/
 #---
 #kind: pipeline
 #type: kubernetes
