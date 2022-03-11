@@ -22,7 +22,8 @@ RUN set -x \
 #      sed 's#\.\./##g') \
 # && curl -o ${DOWNLOADS}/aws-kernel.rpm -sfL $base_url/$rpm_path
 
-FROM ${APT_GCC}
+#FROM ${APT_GCC}
+FROM ubuntu:jammy
 ARG DOWNLOADS=/usr/src/downloads
 COPY --from=base ${DOWNLOADS}/ ${DOWNLOADS}/
 RUN apt-get update \
@@ -47,6 +48,7 @@ RUN apt-get update \
     libmpc-dev \
     dwarves \
     zstd \
+    build-essential libncurses-dev bison flex libssl-dev libelf-dev \
  && rm -f /bin/sh && ln -s /bin/bash /bin/sh \
  && echo pahole version: $(pahole --version)
 
