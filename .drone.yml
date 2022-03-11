@@ -16,8 +16,6 @@ steps:
   volumes:
   - name: dockersock
     path: /var/run
-#  - name: docker
-#    path: /var/run/docker.sock
 
 - name: github_binary_release
   image: ibuildthecloud/github-release:v0.0.1
@@ -32,18 +30,63 @@ steps:
     files:
     - "dist/artifacts/*"
   when:
-          #instance:
-          #- drone-publish.rancher.io
     ref:
     - refs/head/main
     - refs/tags/*
-      #event:
-      #- tag
 
-#volumes:
-#- name: docker
-#  host:
-#    path: /var/run/docker.sock
+services:
+- name: docker
+  image: docker:dind
+  privileged: true
+  volumes:
+  - name: dockersock
+    path: /var/run
+  - name: docker_var_lib
+    path: /var/lib/docker
+  environment:
+    DOCKER_DRIVER: overlay2
+
+volumes:
+- name: dockersock
+  temp: {}
+- name: docker_var_lib
+  host:
+    path: /var/lib/dind/
+---
+kind: pipeline
+type: kubernetes
+name: arm64
+
+platform:
+  os: linux
+  arch: arm64
+
+steps:
+- name: build
+  image: rancher/dapper:v0.4.2
+  commands:
+  - "until (echo | nc local:/var/run/docker.sock | grep -q HTTP); do echo 'waiting..'; sleep 1; done"
+  - dapper ci
+  volumes:
+  - name: dockersock
+    path: /var/run
+
+- name: github_binary_release
+  image: ibuildthecloud/github-release:v0.0.1
+  settings:
+    api_key:
+      from_secret: github_token
+    prerelease: true
+    checksum:
+    - sha256
+    checksum_file: CHECKSUMsum-arm64.txt
+    checksum_flatten: true
+    files:
+    - "dist/artifacts/*"
+  when:
+    ref:
+    - refs/head/main
+    - refs/tags/*
 
 services:
 - name: docker
