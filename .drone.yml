@@ -11,11 +11,12 @@ steps:
 - name: build
   image: rancher/dapper:v0.4.2
   commands:
+  - ln -s /var/run/dind/docker.sock /var/run/docker.sock
   - "until (echo | nc local:/var/run/docker.sock | grep -q HTTP); do echo 'waiting for docker.sock'; sleep 2; done"
   - dapper ci
   volumes:
   - name: docker
-    path: /var/run/docker.sock
+    path: /var/run/dind
 
 volumes:
 - name: docker
@@ -34,11 +35,12 @@ steps:
 - name: build
   image: rancher/dapper:v0.4.2
   commands:
+  - ln -s /var/run/dind/docker.sock /var/run/docker.sock
   - "until (echo | nc local:/var/run/docker.sock | grep -q HTTP); do echo 'waiting for docker.sock'; sleep 2; done"
   - dapper ci
   volumes:
   - name: docker
-    path: /var/run/docker.sock
+    path: /var/run/dind
 
 volumes:
 - name: docker
