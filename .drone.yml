@@ -81,6 +81,9 @@ depends_on:
 - amd64
 - arm64
 
+clone:
+  disable: true
+
 steps:
 - name: trigger  
   image: plugins/downstream
