@@ -1,51 +1,6 @@
 diff -urbB kernel.unpatched/debian.master/config/annotations kernel/debian.master/config/annotations
 --- kernel.unpatched/debian.master/config/annotations	2022-01-21 13:32:27.000000000 +0100
 +++ kernel/debian.master/config/annotations	2022-02-22 22:02:22.000000000 +0100
-@@ -1945,7 +1945,7 @@
- CONFIG_GPIO_EM                                  note<h/w not encounted>
- 
- # Menu: Device Drivers >> GPIO Support >> PCI GPIO expanders
--CONFIG_GPIO_AAEON                               policy<{'amd64': 'm'}>
-+#CONFIG_GPIO_AAEON                               policy<{'amd64': 'm'}>
- CONFIG_GPIO_AMD8111                             policy<{'amd64': 'm'}>
- CONFIG_GPIO_BT8XX                               policy<{'s390x': 'm'}>
- CONFIG_GPIO_MLXBF                               policy<{'arm64': 'm'}>
-@@ -2839,7 +2839,7 @@
- # Menu: Device Drivers >> Hardware Monitoring support
- CONFIG_HWMON                                    policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'n'}>
- CONFIG_HWMON_DEBUG_CHIP                         policy<{'amd64': 'n', 'arm64': 'n', 'armhf': 'n', 'ppc64el': 'n'}>
--CONFIG_SENSORS_AAEON                            policy<{'amd64': 'm'}>
-+#CONFIG_SENSORS_AAEON                            policy<{'amd64': 'm'}>
- CONFIG_SENSORS_ABITUGURU                        policy<{'amd64': 'm'}>
- CONFIG_SENSORS_ABITUGURU3                       policy<{'amd64': 'm'}>
- CONFIG_SENSORS_AD7314                           policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm'}>
-@@ -4196,7 +4196,7 @@
- 
- # Menu: Device Drivers >> LED Support
- CONFIG_NEW_LEDS                                 policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'n'}>
--CONFIG_LEDS_AAEON                               policy<{'amd64': 'm'}>
-+#CONFIG_LEDS_AAEON                               policy<{'amd64': 'm'}>
- 
- # Menu: Device Drivers >> LED Support >> LED Class Support
- CONFIG_LEDS_CLASS                               policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y'}>
-@@ -4953,7 +4953,7 @@
- CONFIG_MFD_KHADAS_MCU                           policy<{'arm64': 'm', 'armhf': 'm'}>
- CONFIG_MFD_ACER_A500_EC                         policy<{'armhf-generic': 'm'}>
- CONFIG_MFD_QCOM_PM8008                          policy<{'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm'}>
--CONFIG_MFD_AAEON                                policy<{'amd64': 'm'}>
-+#CONFIG_MFD_AAEON                                policy<{'amd64': 'm'}>
- CONFIG_MFD_VEXPRESS_SYSREG                      policy<{'arm64': 'y', 'armhf': 'y'}>
- CONFIG_RAVE_SP_CORE                             policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 's390x': 'n'}>
- CONFIG_MFD_INTEL_M10_BMC                        policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm'}>
-@@ -10432,7 +10432,7 @@
- CONFIG_INTEL_MEI_WDT                            policy<{'amd64': 'm'}>
- CONFIG_NI903X_WDT                               policy<{'amd64': 'm'}>
- CONFIG_NIC7018_WDT                              policy<{'amd64': 'm'}>
--CONFIG_AAEON_IWMI_WDT                           policy<{'amd64': 'm'}>
-+#CONFIG_AAEON_IWMI_WDT                           policy<{'amd64': 'm'}>
- CONFIG_BCM2835_WDT                              policy<{'arm64': 'm'}>
- CONFIG_BCM7038_WDT                              policy<{'arm64': 'm'}>
- CONFIG_MEN_A21_WDT                              policy<{'amd64': 'm', 'arm64': 'm', 'armhf': 'm', 'ppc64el': 'm', 's390x': 'm'}>
 @@ -11318,7 +11318,7 @@
  CONFIG_AUDIT                                    policy<{'amd64': 'y', 'arm64': 'y', 'armhf': 'y', 'ppc64el': 'y', 's390x': 'y'}>
  CONFIG_SCHED_CORE                               policy<{'amd64': 'y', 'arm64': 'y', 'ppc64el': 'y', 's390x': 'y'}>
