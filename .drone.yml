@@ -3,9 +3,9 @@ kind: pipeline
 type: kubernetes
 name: amd64
 
-platform:
-  os: linux
-  arch: amd64
+node_selector:
+  role: runner
+  kubernetes.io/arch: amd64
 
 steps:
 - name: build
@@ -38,9 +38,9 @@ kind: pipeline
 type: kubernetes
 name: arm64
 
-platform:
-  os: linux
-  arch: arm64
+node_selector:
+  role: runner
+  kubernetes.io/arch: arm64
 
 steps:
 - name: build
