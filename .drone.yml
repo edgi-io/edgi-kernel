@@ -21,12 +21,12 @@ steps:
 - name: upload
   image: plugins/s3
   settings:
-    bucket:
-      from_secret: aws_bucket
-    source: "dist/artifacts/*"
-    target: /build/edgi-kernel
-      from_secret: drone_bucket_path
+    source: dist/artifacts/*
     strip_prefix: dist/artifacts
+    bucket:
+      from_secret: drone_bucket_name
+    target:
+      from_secret: drone_bucket_path
 
 volumes:
 - name: docker
@@ -56,12 +56,12 @@ steps:
 - name: upload
   image: plugins/s3
   settings:
-    bucket:
-      from_secret: aws_bucket
     source: dist/artifacts/*
-    target: /build/edgi-kernel
-      from_secret: drone_bucket_path
     strip_prefix: dist/artifacts
+    bucket:
+      from_secret: drone_bucket_name
+    target:
+      from_secret: drone_bucket_path
 
 volumes:
 - name: docker
