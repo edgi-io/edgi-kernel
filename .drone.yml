@@ -14,6 +14,7 @@ steps:
   - ln -s /var/run/dind/docker.sock /var/run/docker.sock
   - "until (echo | nc local:/var/run/docker.sock | grep -q HTTP); do echo 'waiting for docker.sock'; sleep 2; done"
   - dapper ci
+  - ls dist
   volumes:
   - name: docker
     path: /var/run/dind
