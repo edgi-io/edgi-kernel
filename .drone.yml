@@ -23,6 +23,8 @@ steps:
   settings:
     source: dist/artifacts/*
     strip_prefix: dist/artifacts
+    region:
+      from_secret: drone_bucket_region
     bucket:
       from_secret: drone_bucket_name
     target:
@@ -58,6 +60,8 @@ steps:
   settings:
     source: dist/artifacts/*
     strip_prefix: dist/artifacts
+    region:
+      from_secret: drone_bucket_region
     bucket:
       from_secret: drone_bucket_name
     target:
