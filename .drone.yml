@@ -32,7 +32,7 @@ steps:
       from_secret: drone_bucket_path
 
 services:
-- name: docker
+- name: dind
   image: docker:dind
   privileged: true
   volumes:
@@ -88,7 +88,7 @@ steps:
       from_secret: drone_bucket_path
 
 services:
-- name: docker
+- name: dind
   image: docker:dind
   privileged: true
   volumes:
