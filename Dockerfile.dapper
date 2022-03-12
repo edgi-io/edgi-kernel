@@ -48,7 +48,7 @@ RUN apt-get update \
     libmpc-dev \
     dwarves \
     zstd \
-    lz4c \
+    liblz4-tool \
     git \
     dahdi-dkms \
     build-essential libncurses-dev bison flex libssl-dev libelf-dev \
