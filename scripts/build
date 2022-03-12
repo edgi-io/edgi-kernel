@@ -23,5 +23,5 @@ debian/rules clean
 #        echo bpfilter > $ver/modules.ignore
 #    done
 #done
-debian/rules binary-headers binary-generic do_zfs=false do_dkms_nvidia=false #skipmodule=true
+debian/rules binary-headers binary-generic do_zfs=false do_dkms_nvidia=false do_cloud_tools=false #skipmodule=true
 popd
