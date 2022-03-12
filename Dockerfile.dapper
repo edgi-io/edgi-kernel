@@ -47,6 +47,7 @@ RUN apt-get update \
     libpci-dev \
     libmpc-dev \
     dwarves \
+    dkms \
     zstd \
     git \
     build-essential libncurses-dev bison flex libssl-dev libelf-dev \
