@@ -14,47 +14,77 @@ steps:
   - ln -s /var/run/dind/docker.sock /var/run/docker.sock
   - "until (echo | nc local:/var/run/docker.sock | grep -q HTTP); do echo 'waiting for docker.sock'; sleep 2; done"
   - dapper ci
-  - ls dist
   volumes:
   - name: docker
     path: /var/run/dind
 
-- name: cache
-  image: plugins/s3-cache
+- name: upload
+  image: plugins/s3
   settings:
-    pull: false
-    rebuild: true
-    bucket: edgi-infra-bootstrap
-    region: eu-north-1
-    debug: true
-    mount:
-      - dist/artifacts
+    bucket:
+      from_secret: aws_bucket
+    source: dist/artifacts/*
+    target: /build/edgi-kernel
+      from_secret: drone_bucket_path
+    strip_prefix: dist/artifacts
 
 volumes:
 - name: docker
   host:
     path: /var/run/dind
-#---
-#kind: pipeline
-#type: kubernetes
-#name: arm64
-#
-#platform:
-#  os: linux
-#  arch: arm64
-#
-#steps:
-#- name: build
-#  image: rancher/dapper:v0.4.2
-#  commands:
-#  - ln -s /var/run/dind/docker.sock /var/run/docker.sock
-#  - "until (echo | nc local:/var/run/docker.sock | grep -q HTTP); do echo 'waiting for docker.sock'; sleep 2; done"
-#  - dapper ci
-#  volumes:
-#  - name: docker
-#    path: /var/run/dind
-#
-#volumes:
-#- name: docker
-#  host:
-#    path: /var/run/dind
+
+---
+kind: pipeline
+type: kubernetes
+name: arm64
+
+platform:
+  os: linux
+  arch: arm64
+
+steps:
+- name: build
+  image: rancher/dapper:v0.4.2
+  commands:
+  - ln -s /var/run/dind/docker.sock /var/run/docker.sock
+  - "until (echo | nc local:/var/run/docker.sock | grep -q HTTP); do echo 'waiting for docker.sock'; sleep 2; done"
+  - dapper ci
+  volumes:
+  - name: docker
+    path: /var/run/dind
+
+- name: upload
+  image: plugins/s3
+  settings:
+    bucket:
+      from_secret: aws_bucket
+    source: dist/artifacts/*
+    target: /build/edgi-kernel
+      from_secret: drone_bucket_path
+    strip_prefix: dist/artifacts
+
+volumes:
+- name: docker
+  host:
+    path: /var/run/dind
+
+---
+kind: pipeline
+type: kubernetes
+name: trigger
+
+depends_on:
+- amd64
+- arm64
+
+steps:
+- name: trigger  
+  image: plugins/downstream
+  settings:
+    server:
+      from_secret: drone_server
+    token:
+      from_secret: drone_token
+    fork: true
+    repositories:
+      - default/edgi-os
