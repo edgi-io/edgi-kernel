@@ -1,13 +1,13 @@
 ARG APT_GCC=gcc:bullseye
 
-FROM ubuntu:jammy AS base
+FROM ubuntu:hirsute AS base
 ARG DOWNLOADS=/usr/src/downloads
 
 ENV DEBIAN_FRONTEND=noninteractive
 RUN set -x \
  && apt-get --assume-yes update \
  && apt-get --assume-yes install software-properties-common \
- && apt-get --assume-yes download linux-firmware linux-source-5.15.0 \
+ && apt-get --assume-yes download linux-firmware linux-source-5.11.0 \
  && mkdir -vp ${DOWNLOADS} \
  && mv -vf linux-firmware* ${DOWNLOADS}/ubuntu-firmware.deb \
  && mv -vf linux-source* ${DOWNLOADS}/ubuntu-kernel.deb
