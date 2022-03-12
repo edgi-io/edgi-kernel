@@ -11,7 +11,7 @@ GENERIC_EXTRA_DIR=dist/generic/modules-extra
 mkdir -p ${GENERIC_HEADERS_DIR} ${GENERIC_MAIN_DIR} ${GENERIC_EXTRA_DIR}
 
 ls build
-set -x
+ls build/linux-hwe-5.15-headers-*.deb || true
 
 # headers
 dpkg-deb -x build/linux-headers-5.*generic*.deb ${GENERIC_HEADERS_DIR}/

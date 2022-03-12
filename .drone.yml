@@ -19,6 +19,17 @@ steps:
   - name: docker
     path: /var/run/dind
 
+- name: cache
+  image: plugins/s3-cache
+  settings:
+    pull: false
+    rebuild: true
+    bucket: edgi-infra-bootstrap
+    region: eu-north-1
+    debug: true
+    mount:
+      - dist/artifacts
+
 volumes:
 - name: docker
   host:
