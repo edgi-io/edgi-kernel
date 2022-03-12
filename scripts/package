@@ -29,13 +29,13 @@ dpkg-deb -x build/linux-modules-extra-5.*generic*.deb ${GENERIC_EXTRA_DIR}
 mkdir -p dist/artifacts
 
 pushd ${GENERIC_HEADERS_DIR}
-time sh -xc "tar cJf ../../artifacts/kernel-headers-generic_${ARCH}.tar.xz ."
+time sh -xc "tar cJf ../../artifacts/kernel-headers-generic_${TARGET_ARCH}.tar.xz ."
 popd
 
 pushd ${GENERIC_MAIN_DIR}
-time sh -xc "tar cJf ../../artifacts/kernel-generic_${ARCH}.tar.xz ."
+time sh -xc "tar cJf ../../artifacts/kernel-generic_${TARGET_ARCH}.tar.xz ."
 popd
 
 pushd ${GENERIC_EXTRA_DIR}
-time sh -xc "tar cJf ../../artifacts/kernel-extra-generic_${ARCH}.tar.xz ."
+time sh -xc "tar cJf ../../artifacts/kernel-extra-generic_${TARGET_ARCH}.tar.xz ."
 popd
